@@ -19,19 +19,20 @@ int main()
         switch (Menu)
         {
         case 1:
-            // sNode trens
-            // criatrem(trens)
+            sNode trens;
+            // criatrem(trens);
+            // adicionaTrem(trens);
             break;
         case 2:
-            // if (listarTrens(trens))
+            // if (trensVazio(trens))
             //     listarTrens(trens);
             // else
             //     printf("Nao ha trens criados");
             break;
         case 3:
-            // if (listarTrens(trens)){
+            // if (trensVazio(trens)){
             //     printf("digite o ID do trem: ");
-            //     scanf("%d", ID);
+            //     scanf("%d", &ID);
             //     if (apagarTrem(trens, ID))
             //         printf("Trem excluido com Sucesso!");
             //     else
@@ -41,6 +42,18 @@ int main()
             //     printf("Nao ha trens criados");
             //     break;
         case 4:
+            // if (!trensVazio(trens))
+            //     printf("Nao ha trens criados");
+            // else
+            // {
+            //     do
+            //     {
+            //         printf("Digite o ID do tre que deseja adicionar o vagão: ");
+            //         scanf("%d", &ID);
+            //     } while (buscarTrem(trens, ID) == NULL);
+            //     adicionaVagao(trens, structVagao(carga[50], qtdCarga));
+            // }
+
             break;
         case 5:
             break;
@@ -52,11 +65,12 @@ int main()
             break;
 
         default:
+
             break;
         }
         printf("\n");
 
-    } while (Menu >= 0 && Menu <= 9);
+    } while (Menu >= 1 && Menu <= 9);
     if (Menu < 0 || Menu > 9)
     {
         printf("Erro: Numero invalido, tente novamente mais tarde...\n");

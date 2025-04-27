@@ -26,7 +26,7 @@ int menu()
     return Menu;
 }
 
-Vagao criaVagao(char Carga, double QTD)
+Vagao structVagao(char *Carga, double QTD)
 {
     Vagao vagao;
     strcpy(vagao.carga, Carga);
