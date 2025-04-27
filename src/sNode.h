@@ -1,14 +1,14 @@
 // Node de criação de listas simples
 struct sNode
 {
-    struct dNode *Trem;
+    struct dNode *trem;
     int id;
     struct sNode *next;
 };
 typedef struct sNode sNode;
 
-int criaTrem(sNode **);
-int adicionaTrem(sNode **);
-int listarTrens(sNode **);
-int buscarTrem(sNode **, int); // Retorna o endereço do Trem
-int removerTrem(sNode **, int);
+sNode *criaTrem(sNode *trens);
+int adicionaTrem(sNode **trens);
+void listarTrens(sNode *trens);
+int removerTrem(sNode **trens, int id);
+int trensVazio(sNode *trens);

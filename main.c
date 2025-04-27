@@ -3,6 +3,8 @@
 int main()
 {
     int Menu = 0, ID;
+    sNode *trens;
+    trens = criaTrem(trens);
     // NodeStart -> menu() -> Adicionar de Trem -> criaTrem() -> menu()
     //   ||
     //   \/
@@ -19,28 +21,27 @@ int main()
         switch (Menu)
         {
         case 1:
-            sNode trens;
-            // criatrem(trens);
-            // adicionaTrem(trens);
+            adicionaTrem(&trens);
             break;
         case 2:
-            // if (trensVazio(trens))
-            //     listarTrens(trens);
-            // else
-            //     printf("Nao ha trens criados");
+            if (trensVazio(trens))
+                listarTrens(trens);
+            else
+                printf("Nao ha trens criados");
             break;
         case 3:
-            // if (trensVazio(trens)){
-            //     printf("digite o ID do trem: ");
-            //     scanf("%d", &ID);
-            //     if (apagarTrem(trens, ID))
-            //         printf("Trem excluido com Sucesso!");
-            //     else
-            //         printf("Erro ao excluir trem, tente novamente");
-            // }
-            // else
-            //     printf("Nao ha trens criados");
-            //     break;
+            if (trensVazio(trens))
+            {
+                printf("digite o ID do trem: ");
+                scanf("%d", &ID);
+                if (removerTrem(&trens, ID))
+                    printf("Trem excluido com Sucesso!");
+                else
+                    printf("Erro ao excluir trem, tente novamente");
+            }
+            else
+                printf("Nao ha trens criados");
+            break;
         case 4:
             // if (!trensVazio(trens))
             //     printf("Nao ha trens criados");
@@ -48,7 +49,7 @@ int main()
             // {
             //     do
             //     {
-            //         printf("Digite o ID do tre que deseja adicionar o vagão: ");
+            //         printf("Digite o ID do trem que deseja adicionar o vagão: ");
             //         scanf("%d", &ID);
             //     } while (buscarTrem(trens, ID) == NULL);
             //     adicionaVagao(trens, structVagao(carga[50], qtdCarga));
@@ -68,6 +69,8 @@ int main()
 
             break;
         }
+        Sleep(1000);
+
         printf("\n");
 
     } while (Menu >= 1 && Menu <= 9);

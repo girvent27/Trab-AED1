@@ -6,7 +6,7 @@ int menu()
     printf("\n        ____      ____\n");
     printf(" |[_n_i_| (   ___/    |\n");
     printf("(__________|_[________]_\n");
-    printf(" 0--0--0      00  00 \n");
+    printf(" 0--0--0      00    00 \n");
     printf("+===============================+\n");
     printf("|    -=GERENCIADOR DE TRENS=-\t|\n");
     printf("+===============================+\n");
@@ -31,5 +31,6 @@ Vagao structVagao(char *Carga, double QTD)
     Vagao vagao;
     strcpy(vagao.carga, Carga);
     vagao.carga_size = QTD;
+
     return vagao;
 }

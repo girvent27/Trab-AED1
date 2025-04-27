@@ -14,7 +14,7 @@ struct dNode
 typedef struct dNode *dNode;
 
 int criaVagao(dNode **);
-int adicionaVagao(dNode **);
+int adicionaVagao(dNode **, int, Vagao);
 int listarVagoes(dNode **);
 int buscarVagao(dNode **, int);
 int removerVagao(dNode **, int);
