@@ -52,8 +52,17 @@ int main()
                 printf("Digite o ID do trem que deseja adicionar o vagão: ");
                 scanf("%d", &ID);
                 printf("Digite a carga do vagao: ");
-                scanf("%49[^\n]", carga);
-                adicionaVagao(trens, ID, structVagao(carga[50], qtdCarga));
+                scanf("%s", carga);
+                printf("Quantidade de Carga: ");
+                scanf("%lf", &qtdCarga);
+                if (adicionaVagao(trens, ID, structVagao(carga[50], qtdCarga)))
+                {
+                    printf("Funcionou");
+                }
+                else
+                {
+                    printf("Nao Funcionou");
+                }
             }
 
             break;

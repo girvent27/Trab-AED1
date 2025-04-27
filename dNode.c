@@ -17,31 +17,35 @@ int maiorIdVagao(dNode **lista)
     return x;
 }
 
-sNode *buscaTrem(sNode **lista, int ID)
+sNode *buscaTrem(sNode *lista, int ID)
 {
     sNode *aux = lista;
-    for (aux = lista; aux->next != NULL; aux = aux->next)
+    while (aux != NULL)
     {
+        printf("Id do trem: %d \n", aux->id);
+        aux = aux->next;
         if (aux->id == ID)
             return aux;
-        else
-            return NULL;
     }
+    return NULL;
 }
 
-int insereVagao(sNode *l, int ID, Vagao vagao)
+dNode *criaLocomotiva()
 {
-    sNode *trem = buscaTrem(l, ID);
-    if (trem == NULL)
-    {
-        dNode locomotiva = (dNode *)malloc(sizeof(dNode));
-        locomotiva->id = 0;
-        strcpy(locomotiva->vagao.carga, "LOCOMOTIVA");
-        locomotiva->next = NULL;
-        locomotiva->prev = NULL;
-    }
 
-    dNode vagoes = l->trem;
+    dNode locomotiva = (dNode *)malloc(sizeof(dNode));
+    locomotiva->id = 0;
+    strcpy(locomotiva->vagao.carga, "LOCOMOTIVA");
+    locomotiva->vagao.carga_size = 0;
+    locomotiva->next = NULL;
+    locomotiva->prev = NULL;
+
+    return locomotiva;
+}
+
+int adicionaVagao(sNode *l, int ID, Vagao vagao)
+{
+    sNode *Trem = buscaTrem(l, ID);
 
     dNode novo = (dNode *)malloc(sizeof(dNode));
     if (novo == NULL)
@@ -49,16 +53,23 @@ int insereVagao(sNode *l, int ID, Vagao vagao)
         return 0;
     }
 
-    novo->id = maiorIdVagao(&vagoes) + 1;
+    novo->id = maiorIdVagao(Trem) + 1;
+    novo->prev = Trem->trem;
+    novo->next = Trem->trem->next;
+    novo->vagao = vagao;
 
-    if (l == NULL)
+    if (Trem->trem->next == NULL)
         novo->next = NULL;
 
-    vagoes->prev = novo;
-    novo->prev = NULL;
-    novo->vagao = vagao;
-    novo->next = l;
-
-    l = novo;
+    Trem->trem->next = novo;
     return 1;
+}
+
+void listarVagao(sNode *l, int ID, Vagao vagao)
+{
+    sNode *Trem = buscaTrem(l, ID);
+    for (dNode aux = Trem; aux->next != NULL; aux = aux->next)
+    {
+        printf("Id do Vagao: %d\n", Trem->trem->id);
+    }
 }
