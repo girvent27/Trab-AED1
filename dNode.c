@@ -33,7 +33,13 @@ int insereVagao(sNode *l, int ID, Vagao vagao)
 {
     sNode *trem = buscaTrem(l, ID);
     if (trem == NULL)
-        return 0;
+    {
+        dNode locomotiva = (dNode *)malloc(sizeof(dNode));
+        locomotiva->id = 0;
+        strcpy(locomotiva->vagao.carga, "LOCOMOTIVA");
+        locomotiva->next = NULL;
+        locomotiva->prev = NULL;
+    }
 
     dNode vagoes = l->trem;
 

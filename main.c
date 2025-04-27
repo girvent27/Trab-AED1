@@ -4,6 +4,8 @@ int main()
 {
     int Menu = 0, ID;
     sNode *trens;
+    char carga[50];
+    double qtdCarga;
     trens = criaTrem(trens);
     // NodeStart -> menu() -> Adicionar de Trem -> criaTrem() -> menu()
     //   ||
@@ -43,17 +45,16 @@ int main()
                 printf("Nao ha trens criados");
             break;
         case 4:
-            // if (!trensVazio(trens))
-            //     printf("Nao ha trens criados");
-            // else
-            // {
-            //     do
-            //     {
-            //         printf("Digite o ID do trem que deseja adicionar o vagão: ");
-            //         scanf("%d", &ID);
-            //     } while (buscarTrem(trens, ID) == NULL);
-            //     adicionaVagao(trens, structVagao(carga[50], qtdCarga));
-            // }
+            if (!trensVazio(trens))
+                printf("Nao ha trens criados");
+            else
+            {
+                printf("Digite o ID do trem que deseja adicionar o vagão: ");
+                scanf("%d", &ID);
+                printf("Digite a carga do vagao: ");
+                scanf("%49[^\n]", carga);
+                adicionaVagao(trens, ID, structVagao(carga[50], qtdCarga));
+            }
 
             break;
         case 5:
