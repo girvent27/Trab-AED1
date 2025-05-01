@@ -35,3 +35,4 @@ dNode *criaLocomotiva();
 int listaVagao(sNode *, int);
 int insereVagao(sNode **, int, Vagao);
 int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao);
+int excluiVagao(sNode **Trem, int ID, int IdVag);

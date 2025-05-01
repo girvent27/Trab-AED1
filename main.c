@@ -52,8 +52,15 @@ int main()
             scanf("%d", &ID);
             if (!listaVagao(trens, ID))
                 printf("Nao há trem com este ID");
+
             printf("\nDigite o ID do vagao: ");
             scanf("%d", &IdVag);
+            while (IdVag == 0)
+            {
+                printf("Locomotiva nao pode ser alterada\nDigite o ID do vagao: ");
+                scanf("%d", &IdVag);
+            }
+
             printf("Digite a Carga: ");
             scanf(" %45[^\n]", carga);
             printf("Digite a Quantidade: ");
@@ -70,7 +77,23 @@ int main()
         case 7:
             break;
         case 8:
+            printf("Digite o ID do Trem: ");
+            scanf("%d", &ID);
+            if (!listaVagao(trens, ID))
+                printf("Nao há trem com este ID");
+            else
+            {
+                printf("\nDigite o ID do vagao: ");
+                scanf("%d", &IdVag);
+                while (IdVag == 0)
+                {
+                    printf("Locomotiva nao pode ser alterada\nDigite o ID do vagao: ");
+                    scanf("%d", &IdVag);
+                }
 
+                if (!excluiVagao(&trens, ID, IdVag))
+                    printf("erro");
+            }
             break;
 
         default:

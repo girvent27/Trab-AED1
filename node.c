@@ -212,3 +212,32 @@ int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao)
     }
     return 1;
 }
+
+int excluiVagao(sNode **Trem, int ID, int IdVag)
+{
+    sNode *aux = buscaTrem(*Trem, ID);
+    if (aux == NULL)
+        return 0;
+    else
+    {
+        dNode *aux_t = aux->trem;
+        while (aux_t != NULL)
+        {
+            if (aux_t->id == IdVag)
+            {
+                if (aux_t == aux->trem)
+                    aux->trem = aux_t->next;
+                else
+                    aux_t->prev->next = aux_t->next;
+
+                if (aux_t != NULL)
+                    aux_t->next->prev = aux_t->prev;
+
+                free(aux_t);
+                return 1;
+            }
+            aux_t = aux_t->next;
+        }
+    }
+    return 1;
+}
