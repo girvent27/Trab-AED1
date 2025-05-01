@@ -99,6 +99,14 @@ int removerTrem(sNode **trens, int id)
     {
         ant->next = aux->next;
     }
+    dNode *aux_t = aux->trem, *next_t;
+    while (aux_t != NULL)
+    {
+        next_t = aux_t->next;
+        free(aux_t);
+        aux_t = next_t;
+    }
+
     free(aux);
     return achou;
 }
@@ -142,7 +150,7 @@ int listaVagao(sNode *Trem, int ID)
         return 0;
     else
     {
-        int i = 1;
+        int i = 0;
         dNode *aux_t = aux->trem;
         printf("Posic.\t|Id\t|Carga\t|Quantidade");
         while (aux_t != NULL)
@@ -175,7 +183,6 @@ int maiorIdVagao(dNode *l)
     return maior;
 }
 
-// FAZER PARA QUALQUER POSICAO MENOS LOCOMOTIVA
 int insereVagao(sNode **Trem, int ID, Vagao vagao, int posicao)
 {
     sNode *aux = buscaTrem(*Trem, ID);
@@ -269,19 +276,22 @@ int excluiVagao(sNode **Trem, int ID, int IdVag)
         {
             if (aux_t->id == IdVag)
             {
+                // testa se eh o comeco da lista
                 if (aux_t == aux->trem)
                     aux->trem = aux_t->next;
                 else
                     aux_t->prev->next = aux_t->next;
-
+                // testa se nao eh o final
                 if (aux_t != NULL)
                     aux_t->next->prev = aux_t->prev;
 
+                // remove do totalizador as quantidades
                 if (!strcmp(aux_t->vagao.unidade, "kg"))
                     aux->kg -= aux_t->vagao.carga_size;
                 else
                     aux->un -= aux_t->vagao.carga_size;
 
+                // libera o espaco e depois remove 1 de vagoes
                 free(aux_t);
                 aux->vagoes--;
                 return 1;
@@ -292,9 +302,71 @@ int excluiVagao(sNode **Trem, int ID, int IdVag)
     return 1;
 }
 
-int organizarVagao(sNode **Trem, int ID, int posi_atual, int posi_nova)
+int organizarVagao(sNode **Trem, int ID, int IdVag, int posi_nova)
 {
+    int id_antiga;
+    Vagao vagao;
     sNode *aux = buscaTrem(*Trem, ID);
-    // excluiVagao(posiataual)
-    // insereVagao(vagao, posinova)
+    if (aux == NULL)
+        return 0;
+    else
+    {
+        dNode *aux_t = aux->trem;
+        dNode *aux_n;
+        while (aux_t != NULL)
+        {
+            if (aux_t->id == IdVag)
+                aux_n = aux_t;
+
+            aux_t = aux_t->next;
+        }
+        vagao = aux_n->vagao;
+        id_antiga = aux_n->id;
+
+        if (excluiVagao(Trem, ID, IdVag))
+        {
+            // crio o vagao
+            dNode *novo = (dNode *)malloc(sizeof(dNode));
+            // coloco a maior id + 1 no vagao
+            novo->id = id_antiga;
+            // coloco vagao no vagao
+            novo->vagao = vagao;
+            // para aumentar valores de totais
+            if (!strcmp(vagao.unidade, "kg"))
+                aux->kg += vagao.carga_size;
+            else
+                aux->un += vagao.carga_size;
+
+            // Insercao posicional ou no inicio
+            if (posi_nova == 0) // insercao no inicio
+            {
+                // coloco que o no anterior eh NULL
+                novo->prev = NULL;
+                // coloco que o vagao seguinte é o primeiro nó anterior
+                novo->next = aux->trem;
+                // coloco que o anterior do primeiro agora eh o novo
+                aux->trem->prev = novo;
+                // cabeca da lista eh o novo
+                aux->trem = novo;
+            }
+            else // insercao posicional
+            {
+                dNode *aux_d = aux->trem;
+
+                for (int i = 0; i < posi_nova - 1; i++)
+                    aux_d = aux_d->next;
+
+                // pega os anteriores e proximos da posicao atual
+                novo->next = aux_d->next;
+                novo->prev = aux_d->prev;
+
+                aux_d->next = aux_d->next->prev = novo;
+            }
+
+            aux->vagoes++;
+            return 1;
+        }
+        else
+            return 0;
+    }
 }

@@ -39,3 +39,4 @@ int insereVagao(sNode **, int, Vagao, int);
 sNode *buscaTrem(sNode *, int);
 int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao);
 int excluiVagao(sNode **Trem, int ID, int IdVag);
+int organizarVagao(sNode **Trem, int ID, int IdVag, int posi_nova);

@@ -60,7 +60,7 @@ int main()
             }
             do
             {
-                printf("Qual Posicao: [0] - Inicio, [%d] - Final", buscaTrem(trens, ID)->vagoes);
+                printf("Qual Posicao: [0] - Inicio, [%d] - Final: ", buscaTrem(trens, ID)->vagoes);
                 scanf("%d", &posicao);
             } while (posicao > buscaTrem(trens, ID)->vagoes || posicao < 0);
 
@@ -72,7 +72,7 @@ int main()
             printf("Digite o ID do Trem: ");
             scanf("%d", &ID);
             if (!listaVagao(trens, ID))
-                printf("Nao há trem com este ID");
+                printf("Nao ha trem com este ID");
 
             printf("\nDigite o ID do vagao: ");
             scanf("%d", &IdVag);
@@ -108,15 +108,30 @@ int main()
             printf("Digite o ID do Trem: ");
             scanf("%d", &ID);
             if (!listaVagao(trens, ID))
-                printf("Nao há trem com este ID");
+                printf("Nao ha trem com este ID");
             break;
         case 7:
+            printf("Digite o ID do Trem: ");
+            scanf("%d", &ID);
+            if (!listaVagao(trens, ID))
+                printf("Nao ha trem com este ID");
+
+            printf("\nDigite o ID do vagao: ");
+            scanf("%d", &IdVag);
+            do
+            {
+                printf("Qual Posicao: [0] - Inicio, [%d] - Final: ", buscaTrem(trens, ID)->vagoes - 1);
+                scanf("%d", &posicao);
+            } while (posicao > buscaTrem(trens, ID)->vagoes - 1 || posicao < 0);
+            if (!organizarVagao(&trens, ID, IdVag, posicao))
+                printf("erro");
+
             break;
         case 8:
             printf("Digite o ID do Trem: ");
             scanf("%d", &ID);
             if (!listaVagao(trens, ID))
-                printf("Nao há trem com este ID");
+                printf("Nao ha trem com este ID");
             else
             {
                 printf("\nDigite o ID do vagao: ");
