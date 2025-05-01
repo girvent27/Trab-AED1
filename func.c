@@ -15,10 +15,9 @@ int menu()
     printf("| [3] Excluir Trem\t\t|\n");
     printf("| [4] Adicionar Vagao\t\t|\n");
     printf("| [5] Mudar Carga de Vagao\t|\n");
-    printf("| [6] Mudar Quant. de Carga\t|\n");
-    printf("| [7] Listar Vagoes\t\t|\n");
-    printf("| [8] Reorganizar Vagao\t\t|\n");
-    printf("| [9] Excluir Vagao\t\t|\n");
+    printf("| [6] Listar Vagoes\t\t|\n");
+    printf("| [7] Reorganizar Vagao\t\t|\n");
+    printf("| [8] Excluir Vagao\t\t|\n");
     printf("+===============================+\n");
     printf("| [0] Sair\t\t\t|\n");
     printf("+===============================+\nOpcao: ");

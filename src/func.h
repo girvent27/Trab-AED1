@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "sNode.h"
-#include "dNode.h"
+#include "node.h"
 
 int menu();
 Vagao structVagao(char *, double);

@@ -2,24 +2,16 @@
 
 int main()
 {
-    int Menu = 0, ID;
+    int Menu = 0, ID, IdVag;
     sNode *trens;
     char carga[50];
     double qtdCarga;
-    trens = criaTrem(trens);
-    // NodeStart -> menu() -> Adicionar de Trem -> criaTrem() -> menu()
-    //   ||
-    //   \/
-    // menu() -> Adicionar Vagao -> Se nn tiver trem criado -> menu()
-    //                           -> criaVagao()
-    //   ||
-    //   \/
-    // menu() -> Organizar Vagao -> Qula o ID do Trem? -> ID vagao e nova posição
-
+    trens = criaTrem();
     do
     {
         Menu = menu();
         printf("\n");
+        // printf("\e[1;1H\e[2J");
         switch (Menu)
         {
         case 1:
@@ -45,34 +37,40 @@ int main()
                 printf("Nao ha trens criados");
             break;
         case 4:
-            if (!trensVazio(trens))
-                printf("Nao ha trens criados");
-            else
-            {
-                printf("Digite o ID do trem que deseja adicionar o vagão: ");
-                scanf("%d", &ID);
-                printf("Digite a carga do vagao: ");
-                scanf("%s", carga);
-                printf("Quantidade de Carga: ");
-                scanf("%lf", &qtdCarga);
-                if (adicionaVagao(trens, ID, structVagao(carga[50], qtdCarga)))
-                {
-                    printf("Funcionou");
-                }
-                else
-                {
-                    printf("Nao Funcionou");
-                }
-            }
+            printf("Digite o ID do trem: ");
+            scanf("%d", &ID);
+            printf("Digite a Carga: ");
+            scanf(" %45[^\n]", carga);
+            printf("Digite a Quantidade: ");
+            scanf("%lf", &qtdCarga);
+            if (!insereVagao(&trens, ID, structVagao(carga, qtdCarga)))
+                printf("erro");
 
             break;
         case 5:
+            printf("Digite o ID do Trem: ");
+            scanf("%d", &ID);
+            if (!listaVagao(trens, ID))
+                printf("Nao há trem com este ID");
+            printf("\nDigite o ID do vagao: ");
+            scanf("%d", &IdVag);
+            printf("Digite a Carga: ");
+            scanf(" %45[^\n]", carga);
+            printf("Digite a Quantidade: ");
+            scanf("%lf", &qtdCarga);
+            if (!mudaCarga(&trens, ID, IdVag, structVagao(carga, qtdCarga)))
+                printf("erro");
             break;
         case 6:
+            printf("Digite o ID do Trem: ");
+            scanf("%d", &ID);
+            if (!listaVagao(trens, ID))
+                printf("Nao há trem com este ID");
             break;
         case 7:
             break;
         case 8:
+
             break;
 
         default:
