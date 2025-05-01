@@ -25,11 +25,12 @@ int menu()
     return Menu;
 }
 
-Vagao structVagao(char *Carga, double QTD)
+Vagao structVagao(char *Carga, double QTD, char *Unidade)
 {
     Vagao vagao;
     strcpy(vagao.carga, Carga);
     vagao.carga_size = QTD;
+    strcpy(vagao.unidade, Unidade);
 
     return vagao;
 }

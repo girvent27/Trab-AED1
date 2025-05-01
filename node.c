@@ -30,6 +30,8 @@ int adicionaTrem(sNode **trens)
         novo->id = maior + 1;
         novo->next = (*trens);
     }
+    novo->vagoes = 0;
+    novo->kg = novo->un = 0;
     (*trens) = novo;
     return 1;
 }
@@ -60,9 +62,10 @@ void listarTrens(sNode *trens)
 {
     sNode *aux;
     aux = trens;
+    printf("|ID\t|Vagoes\t|Ttl Kg\t|Ttl Un\n");
     while (aux != NULL)
     {
-        printf("Id do trem: %d \n", aux->id);
+        printf("|%d\t|%d\t|%.3lf\t|%.0lf\n", aux->id, aux->vagoes, aux->kg, aux->un);
         aux = aux->next;
     }
 }
@@ -139,16 +142,19 @@ int listaVagao(sNode *Trem, int ID)
         return 0;
     else
     {
+        int i = 1;
         dNode *aux_t = aux->trem;
-        printf("Cod.\tCarga\tQuantidade");
+        printf("Posic.\t|Id\t|Carga\t|Quantidade");
         while (aux_t != NULL)
         {
-            printf("\n%d\t", aux_t->id);
-            printf("%s\t", aux_t->vagao.carga);
+            printf("\n%d    |\t", i);
+            printf("|%d\t", aux_t->id);
+            printf("|%s\t", aux_t->vagao.carga);
             if (aux_t->id != 0)
-                printf("%.3lf\t", aux_t->vagao.carga_size);
-
+                printf("|%.3lf\t", aux_t->vagao.carga_size);
+            printf("|");
             aux_t = aux_t->next;
+            i++;
         }
     }
 
@@ -169,7 +175,8 @@ int maiorIdVagao(dNode *l)
     return maior;
 }
 
-int insereVagao(sNode **Trem, int ID, Vagao vagao)
+// FAZER PARA QUALQUER POSICAO MENOS LOCOMOTIVA
+int insereVagao(sNode **Trem, int ID, Vagao vagao, int posicao)
 {
     sNode *aux = buscaTrem(*Trem, ID);
     if (aux == NULL)
@@ -178,22 +185,47 @@ int insereVagao(sNode **Trem, int ID, Vagao vagao)
     {
         // crio o vagao
         dNode *novo = (dNode *)malloc(sizeof(dNode));
-
         // coloco a maior id + 1 no vagao
         novo->id = maiorIdVagao(aux->trem) + 1;
         // coloco vagao no vagao
         novo->vagao = vagao;
-        // coloco que o no anterior eh a locomotiva
-        novo->prev = NULL;
-        // coloco que o vagao seguinte é o seguinte nó anterior
-        novo->next = aux->trem;
+        // para aumentar valores de totais
+        if (!strcmp(vagao.unidade, "kg"))
+            aux->kg += vagao.carga_size;
+        else
+            aux->un += vagao.carga_size;
 
-        aux->trem->prev = novo;
+        // Insercao posicional ou no inicio
+        if (posicao == 0) // insercao no inicio
+        {
+            // coloco que o no anterior eh NULL
+            novo->prev = NULL;
+            // coloco que o vagao seguinte é o primeiro nó anterior
+            novo->next = aux->trem;
+            // coloco que o anterior do primeiro agora eh o novo
+            aux->trem->prev = novo;
+            // cabeca da lista eh o novo
+            aux->trem = novo;
+        }
+        else // insercao posicional
+        {
+            dNode *aux_t = aux->trem;
 
-        aux->trem = novo;
+            for (int i = 0; i < posicao - 1; i++)
+                aux_t = aux_t->next;
+
+            // pega os anteriores e proximos da posicao atual
+            novo->next = aux_t->next;
+            novo->prev = aux_t->prev;
+
+            aux_t->next = aux_t->next->prev = novo;
+        }
+
+        aux->vagoes++;
         return 1;
     }
 }
+
 int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao)
 {
     sNode *aux = buscaTrem(*Trem, ID);
@@ -205,7 +237,19 @@ int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao)
         while (aux_t != NULL)
         {
             if (aux_t->id == IdVag)
+            {
+                if (!strcmp(aux_t->vagao.unidade, "kg"))
+                    aux->kg -= aux_t->vagao.carga_size;
+                else
+                    aux->un -= aux_t->vagao.carga_size;
                 aux_t->vagao = vagao;
+
+                // coloca mais carga no totalizador do no
+                if (!strcmp(vagao.unidade, "kg"))
+                    aux->kg += vagao.carga_size;
+                else
+                    aux->un += vagao.carga_size;
+            }
 
             aux_t = aux_t->next;
         }
@@ -233,11 +277,24 @@ int excluiVagao(sNode **Trem, int ID, int IdVag)
                 if (aux_t != NULL)
                     aux_t->next->prev = aux_t->prev;
 
+                if (!strcmp(aux_t->vagao.unidade, "kg"))
+                    aux->kg -= aux_t->vagao.carga_size;
+                else
+                    aux->un -= aux_t->vagao.carga_size;
+
                 free(aux_t);
+                aux->vagoes--;
                 return 1;
             }
             aux_t = aux_t->next;
         }
     }
     return 1;
+}
+
+int organizarVagao(sNode **Trem, int ID, int posi_atual, int posi_nova)
+{
+    sNode *aux = buscaTrem(*Trem, ID);
+    // excluiVagao(posiataual)
+    // insereVagao(vagao, posinova)
 }

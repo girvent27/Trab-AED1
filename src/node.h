@@ -4,6 +4,7 @@ struct sNode
     struct dNode *trem;
     int id;
     int vagoes;
+    double un, kg;
     struct sNode *next;
 };
 typedef struct sNode sNode;
@@ -12,6 +13,7 @@ typedef struct TrainCar
 {
     char carga[50];
     double carga_size;
+    char unidade[3];
 } Vagao;
 
 struct dNode
@@ -33,6 +35,7 @@ int trensVazio(sNode *trens);
 // No duplamente encadeado
 dNode *criaLocomotiva();
 int listaVagao(sNode *, int);
-int insereVagao(sNode **, int, Vagao);
+int insereVagao(sNode **, int, Vagao, int);
+sNode *buscaTrem(sNode *, int);
 int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao);
 int excluiVagao(sNode **Trem, int ID, int IdVag);

@@ -2,9 +2,9 @@
 
 int main()
 {
-    int Menu = 0, ID, IdVag;
+    int Menu = 0, ID, IdVag, esc = 0, posicao;
     sNode *trens;
-    char carga[50];
+    char carga[50], unidade[3];
     double qtdCarga;
     trens = criaTrem();
     do
@@ -43,7 +43,28 @@ int main()
             scanf(" %45[^\n]", carga);
             printf("Digite a Quantidade: ");
             scanf("%lf", &qtdCarga);
-            if (!insereVagao(&trens, ID, structVagao(carga, qtdCarga)))
+            printf("Qual a medida {[1] - Unidade | [2] Kilograma}\n(Padrao [1]): ");
+            scanf("%d", &esc);
+            switch (esc)
+            {
+            case 1:
+                strcpy(unidade, "un");
+                break;
+            case 2:
+                strcpy(unidade, "kg");
+                break;
+
+            default:
+                strcpy(unidade, "un");
+                break;
+            }
+            do
+            {
+                printf("Qual Posicao: [0] - Inicio, [%d] - Final", buscaTrem(trens, ID)->vagoes);
+                scanf("%d", &posicao);
+            } while (posicao > buscaTrem(trens, ID)->vagoes || posicao < 0);
+
+            if (!insereVagao(&trens, ID, structVagao(carga, qtdCarga, unidade), posicao))
                 printf("erro");
 
             break;
@@ -65,7 +86,22 @@ int main()
             scanf(" %45[^\n]", carga);
             printf("Digite a Quantidade: ");
             scanf("%lf", &qtdCarga);
-            if (!mudaCarga(&trens, ID, IdVag, structVagao(carga, qtdCarga)))
+            printf("Qual a medida {[1] - Unidade | [2] Kilograma}\n(Padrao [1]): ");
+            scanf("%d", &esc);
+            switch (esc)
+            {
+            case 1:
+                strcpy(unidade, "un");
+                break;
+            case 2:
+                strcpy(unidade, "kg");
+                break;
+
+            default:
+                strcpy(unidade, "un");
+                break;
+            }
+            if (!mudaCarga(&trens, ID, IdVag, structVagao(carga, qtdCarga, unidade)))
                 printf("erro");
             break;
         case 6:

@@ -5,4 +5,4 @@
 #include "node.h"
 
 int menu();
-Vagao structVagao(char *, double);
+Vagao structVagao(char *, double, char *);
