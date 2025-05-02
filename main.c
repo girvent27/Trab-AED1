@@ -134,21 +134,27 @@ int main()
                 printf("Nao ha trem com este ID");
             else
             {
-                printf("\nDigite o ID do vagao: ");
-                scanf("%d", &IdVag);
-                while (IdVag == 0)
+                IdVag = 0;
+                do
                 {
-                    printf("Locomotiva nao pode ser alterada\nDigite o ID do vagao: ");
+                    printf("\nDigite o ID do vagao: ");
                     scanf("%d", &IdVag);
-                }
+                } while (IdVag < 1);
+                do
+                {
+                    printf("Qual Posicao: [0] - Inicio, [%d] - Final: ", buscaTrem(trens, ID)->vagoes - 1);
+                    scanf("%d", &posicao);
+                } while (posicao > buscaTrem(trens, ID)->vagoes - 1 || posicao < 0);
 
                 if (!excluiVagao(&trens, ID, IdVag))
                     printf("erro");
             }
             break;
 
+        case 9:
+            teste(&trens);
+            break;
         default:
-
             break;
         }
         Sleep(1000);

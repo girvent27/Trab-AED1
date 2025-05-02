@@ -152,14 +152,18 @@ int listaVagao(sNode *Trem, int ID)
     {
         int i = 0;
         dNode *aux_t = aux->trem;
-        printf("Posic.\t|Id\t|Carga\t|Quantidade");
+        printf("|Posic.\t|Id\t|Carga\t|Qntd\t|UN\t|");
+        printf("\n+---\t+---\t+---\t+---\t+-----\t+");
         while (aux_t != NULL)
         {
-            printf("\n%d    |\t", i);
+            printf("\n|%d\t", i);
             printf("|%d\t", aux_t->id);
-            printf("|%s\t", aux_t->vagao.carga);
+            printf("|%.6s\t", aux_t->vagao.carga);
             if (aux_t->id != 0)
-                printf("|%.3lf\t", aux_t->vagao.carga_size);
+            {
+                printf("|%.1lf\t", aux_t->vagao.carga_size);
+                printf("|%s\t", aux_t->vagao.unidade);
+            }
             printf("|");
             aux_t = aux_t->next;
             i++;

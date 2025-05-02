@@ -6,3 +6,4 @@
 
 int menu();
 Vagao structVagao(char *, double, char *);
+void teste(sNode **);

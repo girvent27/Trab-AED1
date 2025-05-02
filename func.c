@@ -34,3 +34,19 @@ Vagao structVagao(char *Carga, double QTD, char *Unidade)
 
     return vagao;
 }
+
+void teste(sNode **trem)
+{
+    adicionaTrem(trem);
+    adicionaTrem(trem);
+    insereVagao(trem, 1, structVagao("Carvao", 80, "kg"), 0);
+    insereVagao(trem, 1, structVagao("Frutas", 12, "kg"), 0);
+    insereVagao(trem, 1, structVagao("Madeira", 25, "un"), 0);
+    insereVagao(trem, 1, structVagao("Circo", 1, "un"), 0);
+    insereVagao(trem, 1, structVagao("ij", 12, "kg"), 0);
+    insereVagao(trem, 2, structVagao("je", 12, "kg"), 0);
+    insereVagao(trem, 2, structVagao("an", 12, "kg"), 0);
+    insereVagao(trem, 2, structVagao("lu", 12, "kg"), 0);
+    insereVagao(trem, 2, structVagao("cg", 12, "kg"), 0);
+    insereVagao(trem, 2, structVagao("ir", 12, "kg"), 0);
+}
