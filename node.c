@@ -1,4 +1,4 @@
-#include "src/func.h"
+#include "func.h"
 
 // Fazer funcao de excluir vcagao na de excluir tem parea nao ter memoria vazando
 dNode *criaLocomotiva();
@@ -303,7 +303,7 @@ int excluiVagao(sNode **Trem, int ID, int IdVag)
             aux_t = aux_t->next;
         }
     }
-    return 1;
+    return 0;
 }
 
 int organizarVagao(sNode **Trem, int ID, int IdVag, int posi_nova)
