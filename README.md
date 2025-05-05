@@ -3,6 +3,3 @@
 ### Compilação feita pelo C
 
 Sistema de trens em lista simplesmente encadeada, com vagões duplamente encadeados.
-
-
-

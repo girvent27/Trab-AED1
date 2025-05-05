@@ -86,23 +86,26 @@ void mainReorganizaVagao(sNode *trens)
         scanf("%d", &ID);
         if (!listaVagao(trens, ID))
             printf("Nao ha trem com este ID");
-        do
+        else
         {
-            if (IdVag == 0)
-                printf("Locomotiva nao pode ser alterada\n");
-            if (IdVag > maiorIdVagao((buscaTrem(trens, ID)->trem)))
-                printf("ID invalido\n");
-            printf("\nDigite o ID do vagao: ");
-            scanf("%d", &IdVag);
+            do
+            {
+                if (IdVag == 0)
+                    printf("Locomotiva nao pode ser alterada\n");
+                if (IdVag > maiorIdVagao((buscaTrem(trens, ID)->trem)))
+                    printf("ID invalido\n");
+                printf("\nDigite o ID do vagao: ");
+                scanf("%d", &IdVag);
 
-        } while (IdVag < 1 || IdVag > maiorIdVagao((buscaTrem(trens, ID)->trem)));
-        do
-        {
-            printf("Qual Posicao: [0] - Inicio, [%d] - Final: ", buscaTrem(trens, ID)->vagoes - 1);
-            scanf("%d", &posicao);
-        } while (posicao > buscaTrem(trens, ID)->vagoes - 1 || posicao < 0);
-        if (!organizarVagao(&trens, ID, IdVag, posicao))
-            printf("erro");
+            } while (IdVag < 1 || IdVag > maiorIdVagao((buscaTrem(trens, ID)->trem)));
+            do
+            {
+                printf("Qual Posicao: [0] - Inicio, [%d] - Final: ", buscaTrem(trens, ID)->vagoes - 1);
+                scanf("%d", &posicao);
+            } while (posicao > buscaTrem(trens, ID)->vagoes - 1 || posicao < 0);
+            if (!organizarVagao(&trens, ID, IdVag, posicao))
+                printf("erro");
+        }
     }
 }
 void mainExcluiVagao(sNode *trens)
