@@ -3,6 +3,7 @@
 #include <string.h>
 #include "node.h"
 
+// funções auxiliares
 int menu();
 Vagao structVagao(char *, double, char *);
 void teste(sNode **);

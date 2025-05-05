@@ -1,5 +1,6 @@
 #include "func.h"
 
+// int main() contendo a chamada das funções
 int main()
 {
     int Menu = 0, ID;
@@ -59,4 +60,5 @@ int main()
     {
         printf("Erro: Numero invalido, tente novamente mais tarde...\n\n");
     }
+    return 0;
 }

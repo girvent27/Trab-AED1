@@ -1,14 +1,19 @@
 #include "func.h"
+//                    --==IMPORTANTE==--
+//===================================================================+
+// Todas as funções buscam pelo trem/vagao baseado pela ID de cada um|
+// As funções retornam 1 se sucesso, em caso de erros, retorna 0.    |
+//===================================================================+
 
-// Fazer funcao de excluir vcagao na de excluir tem parea nao ter memoria vazando
+// Nos Simplesmente Encadeados
 dNode *criaLocomotiva();
 int maiorID(sNode **trens);
-
+// criação de Lista simples
 sNode *criaTrem()
 {
     return NULL;
 }
-
+// Função de adicionar tren a lista de trens
 int adicionaTrem(sNode **trens)
 {
     sNode *novo;
@@ -35,7 +40,7 @@ int adicionaTrem(sNode **trens)
     (*trens) = novo;
     return 1;
 }
-
+// Retorna o maior ID dos trens
 int maiorID(sNode **trens)
 {
     sNode *aux;
@@ -52,12 +57,12 @@ int maiorID(sNode **trens)
     }
     return maior;
 }
-
+// Verifica se o a lista de trens é vazia
 int trensVazio(sNode *trens)
 {
     return (trens != NULL);
 }
-
+// Lista os trens criados
 void listarTrens(sNode *trens)
 {
     sNode *aux;
@@ -69,7 +74,7 @@ void listarTrens(sNode *trens)
         aux = aux->next;
     }
 }
-
+// Remove trem da lista
 int removerTrem(sNode **trens, int id)
 {
     sNode *aux;
@@ -111,8 +116,8 @@ int removerTrem(sNode **trens, int id)
     return achou;
 }
 
-// Nos Duplamente encadeados
-
+// Nos Duplamente Encadeados
+// funções de criação de lista e de Locomotiva (o primeiro item inseridode todas as listas)
 dNode *criaDNode()
 {
     return NULL;
@@ -142,7 +147,7 @@ sNode *buscaTrem(sNode *l, int ID)
     }
     return NULL;
 }
-
+// Lista os vagoes, retorna 0 se tiver nenhum e 1 se tiver ok
 int listaVagao(sNode *Trem, int ID)
 {
     sNode *aux = buscaTrem(Trem, ID);
@@ -172,7 +177,7 @@ int listaVagao(sNode *Trem, int ID)
 
     return 1;
 }
-
+// Retorna a maior id entre os vagoes do trem especifico
 int maiorIdVagao(dNode *l)
 {
     int maior = 0;
@@ -186,7 +191,7 @@ int maiorIdVagao(dNode *l)
     }
     return maior;
 }
-
+// Insere baseado na posição dada
 int insereVagao(sNode **Trem, int ID, Vagao vagao, int posicao)
 {
     sNode *aux = buscaTrem(*Trem, ID);
@@ -236,7 +241,8 @@ int insereVagao(sNode **Trem, int ID, Vagao vagao, int posicao)
         return 1;
     }
 }
-
+// Muda a carga de um vagao ja criado
+// Nao pode mexer na Locomotiva
 int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao)
 {
     sNode *aux = buscaTrem(*Trem, ID);
@@ -267,7 +273,8 @@ int mudaCarga(sNode **Trem, int ID, int IdVag, Vagao vagao)
     }
     return 1;
 }
-
+// Exclui um vagao especifico da lista
+// Nao pode mexer na Locomotiva
 int excluiVagao(sNode **Trem, int ID, int IdVag)
 {
     sNode *aux = buscaTrem(*Trem, ID);
@@ -305,7 +312,8 @@ int excluiVagao(sNode **Trem, int ID, int IdVag)
     }
     return 0;
 }
-
+// Remove o trem da posição antiga e insere baseado na posição dada
+// Nao pode mexer na Locomotiva
 int organizarVagao(sNode **Trem, int ID, int IdVag, int posi_nova)
 {
     int id_antiga;

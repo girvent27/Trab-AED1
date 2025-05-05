@@ -1,4 +1,4 @@
-// Node de criação de listas simples
+// Node de listas simples
 struct sNode
 {
     struct dNode *trem;
@@ -8,14 +8,14 @@ struct sNode
     struct sNode *next;
 };
 typedef struct sNode sNode;
-
+// Struc dos vagões
 typedef struct TrainCar
 {
     char carga[50];
     double carga_size;
     char unidade[3];
 } Vagao;
-
+// Node de listas duplamente encadeadas
 struct dNode
 {
     Vagao vagao;
@@ -25,14 +25,14 @@ struct dNode
 };
 typedef struct dNode dNode;
 
-// No simplesmente encadeado
+// Funções de No Simplesmente Encadeado
 sNode *criaTrem();
 int adicionaTrem(sNode **trens);
 void listarTrens(sNode *trens);
 int removerTrem(sNode **trens, int id);
 int trensVazio(sNode *trens);
 
-// No duplamente encadeado
+// Funções de No Duplamente Encadeado
 dNode *criaLocomotiva();
 int listaVagao(sNode *, int);
 int maiorIdVagao(dNode *l);

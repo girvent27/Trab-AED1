@@ -1,5 +1,5 @@
 #include "func.h"
-
+// Função para retornar escolha do menu
 int menu()
 {
     int Menu;
@@ -24,7 +24,7 @@ int menu()
     scanf("%d", &Menu);
     return Menu;
 }
-
+// Função que retorna um vagão
 Vagao structVagao(char *Carga, double QTD, char *Unidade)
 {
     Vagao vagao;
@@ -34,6 +34,8 @@ Vagao structVagao(char *Carga, double QTD, char *Unidade)
 
     return vagao;
 }
+// Funções para validação de dados para melhor compreensão da main()
+// Todas são void pois não precisam retornar nada
 void mainCriaVagao(sNode *trens)
 {
     int ID, esc = 0, posicao;
