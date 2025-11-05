@@ -11,7 +11,7 @@ int maiorID(sNode **trens);
 // criação de Lista simples
 sNode *criaTrem()
 {
-    return NULL; // ola
+    return NULL;
 }
 // Função de adicionar tren a lista de trens
 int adicionaTrem(sNode **trens)
