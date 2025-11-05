@@ -1,11 +1,11 @@
 // Node de listas simples
 struct sNode
 {
-    struct dNode *trem;
-    int id;
-    int vagoes;
-    double un, kg;
-    struct sNode *next;
+    struct dNode *trem; // Lista de Vagoes
+    int id;             // Identificacao
+    int vagoes;         // Numero de Vagoes
+    double un, kg;      // Pesso e quantidades total
+    struct sNode *next; // No do proximo
 };
 typedef struct sNode sNode;
 // Struc dos vagões
